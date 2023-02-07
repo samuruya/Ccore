@@ -1,3 +1,3 @@
 # Ccore
 
-Simple site for anonym chatrooms.
+Simple website for anonymized chatrooms.
