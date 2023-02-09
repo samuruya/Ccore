@@ -33,8 +33,7 @@ io.on(`connection`, socket => {
 
     //
     socket.on(`chatMsg`, data => {
-        io.emit(`msg`, formatMsg(data.Username, data.msg));
-        console.log(data);   
+        io.emit(`msg`, formatMsg(data.Username, data.msg));  
     });
 });
 

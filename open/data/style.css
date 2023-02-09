@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&family=Varela+Round&display=swap');
 
 :root {
 	--dark-color-a: #667aff;
@@ -6,6 +8,24 @@
 	--light-color: #e6e9ff;
 	--success-color: #5cb85c;
 	--error-color: #d9534f;
+
+	--font:'Ubuntu', sans-serif;
+
+    --white:#F9F9F9;
+    --l-white:#F9F9F980;
+    --black:#1A1A1A;
+    --l-black:#1A1A1A80;
+    --pink:#E91E63;
+    --pinkish:#C2185B;
+    --violet:#9c27b0;
+    --l-violet:#9c27b080;
+    --purple:#5727b0;
+    --o-blue:#272ab0;
+    --blue:#276bb0;
+    --light:#57acdc;
+    --silico:#57dcbe;
+    --l-silico:#57dcbe80;
+    --mocha:#60c689;
 }
 
 * {
@@ -17,10 +37,17 @@
 body {
 	height: 100%;
 	width: 100%;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Ubuntu', sans-serif;
 	font-size: 16px;
-	background: var(--light-color);
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 120% 120%;
+
+	height: 100vh;
 }
+  
+
+
+
 
 ul {
 	list-style: none;
@@ -42,15 +69,14 @@ a {
 /* Chat Page */
 
 .chat-container {
-	max-width: 1100px;
-	background: #fff;
-	margin: 30px auto;
+	width: 100%;
+	height: 100%;
+	background: var(--black);
 	overflow: hidden;
 }
 
 .chat-header {
-	background: var(--dark-color-a);
-	color: #fff;
+	color: var(--white);
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	padding: 15px;
@@ -65,10 +91,11 @@ a {
 }
 
 .chat-sidebar {
-	background: var(--dark-color-b);
+	background: var(--l-silico);
 	color: #fff;
 	padding: 20px 20px 60px;
 	overflow-y: scroll;
+	border-radius: 0px 20px 20px 0px;
 }
 
 .chat-sidebar h2 {
@@ -88,7 +115,8 @@ a {
 
 .chat-messages {
 	padding: 30px;
-	max-height: 500px;
+	min-height: 80vh;
+	max-height: 80vh;
 	overflow-y: scroll;
 }
 
@@ -96,7 +124,7 @@ a {
 	padding: 10px;
 	margin-bottom: 15px;
 	background-color: var(--light-color);
-	border-radius: 5px;
+	border-radius: 20px 20px 0px 20px;
 	overflow-wrap: break-word;
 }
 
@@ -114,7 +142,6 @@ a {
 
 .chat-form-container {
 	padding: 20px 30px;
-	background-color: var(--dark-color-a);
 }
 
 .chat-form-container form {
@@ -126,9 +153,99 @@ a {
 	padding: 5px;
 	height: 40px;
 	flex: 1;
+	border: none;
+	background: var(--silico);
+	border-radius: 10px 0px 0px 10px;
 }
 
 /* Join Page */
+
+.join-top {
+	display: grid;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+	width: 100%;
+}
+
+.join-top h1 {
+	margin-left: -20px;
+	margin-bottom: 20px;
+}
+
+.userIn {
+	color: white;
+	background: var(--black);
+	display: flex;
+	flex-direction: column;
+	width: 30%;
+	padding: 5%;
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	border-radius: 20px;
+}
+
+.userIn form {
+	display: flex;
+	flex-direction: column;
+}
+
+.inText {
+	display: flex;
+	font-size: 1.3em;
+	flex-direction: column;
+	margin: 20px 0px;
+}
+
+.userIn form div input[type='text'] {
+	border: none;
+	padding: 10px 10px;
+	border-radius: 0px 10px 10px 10px;
+}
+
+.logbuttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 20px;
+	text-align: center;
+}
+
+.logbuttons span {
+	position: absolute;
+	margin-right: -31%;
+	margin-top: 9%;
+	width: 28%;
+	visibility: hidden;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	z-index: -1;
+
+}
+
+.logbuttons input{
+	width: 40%;
+	border: none;
+	font-size: 1.2em;
+	color: var(--white);
+	background-color: var(--pink);
+	padding: 10px;
+	border-radius: 10px;
+	transition: ease-in 150ms;
+	z-index: 2;
+}
+
+.logbuttons input:hover {
+	transform: scale(1.1);
+	background: var(--pinkish);
+	transition: ease-out 150ms;
+}
+
 .join-container {
 	max-width: 500px;
 	margin: 80px auto;

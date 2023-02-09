@@ -4,15 +4,29 @@
 		<link rel="stylesheet" href="data/style.css" />
 		<title>CCore entry</title>
 	</head>
-			<header class="join-header">
-				<img src="https://i.ibb.co/0XnFLjW/ccore.png" alt="" height="64px">
-				<h1>CCORE</h1>
-			</header>
+	<body>
+		
+			<div class="userIn">
+				<div class="join-top">
+					<img src="https://i.ibb.co/0XnFLjW/ccore.png" alt="" height="64px" width="64px">
+					<h1>CCORE</h1>
+				</div>
 				<form>
-					<input placeholder="Name" type="text" id="uname">
-					<input placeholder="roomID" type="text" id="room">
-					<input type="button" value="Enter" onclick="login()">
+					<div class="inText">
+						<label for="">Username:</label>
+						<input type="text" id="uname">
+					</div>
+					<div class="inText">
+						<label for="">Room ID:</label>
+						<input type="text" id="room">
+					</div>
+					<div class="logbuttons">
+						<input type="button" class="logbtn" value="Enter" onclick="login()">
+						<span class="tooltiptext" id="tooltiptext">Tooltip text</span>
+						<input type="button" value="Reconnect" onmouseover="chbg('visible')" onmouseout="chbg('hidden')" id="reconnect" onclick="reConnect()">
+					</div>
 				</form>
-				<script src="data/enter.js"></script>
+			</div>
+				<script src="data/enter.js" onload="returning()"></script>
 	</body>
 </html>
