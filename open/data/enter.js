@@ -9,17 +9,24 @@ function login() {
         roomID: document.getElementById(`room`).value
     }
 
-    if (userData.usrname.length >= 4) {
-        if (userData.roomID.length >= 5) {
+    if (userData.usrname.length >= 4 && userData.roomID.length >= 5) {
+
             localStorage.setItem('userData', JSON.stringify(userData));
             console.log('login');
-            window.location.href = "chat.html";
-            //add code for quarrystring room selection
-        } else {
-            console.log('roomID is invalid!');
-        }        
-    } else  {
+            let baseUrl = "http://localhost:3000/chat.html?";
+            let queryString = "room=" + userData.roomID;
+            let fullUrl = baseUrl + queryString;
+            window.location.href = fullUrl;             
+    }
+    if(userData.roomID.length < 5) {
+        console.log('roomID is invalid!');
+        document.getElementById(`room`).style.background = "#d9534f"
+        document.getElementsByName(`room`)[0].placeholder = "invalid room id"
+    }
+    if(userData.usrname.length < 4) {
         console.log('Username to Short!');
+        document.getElementById(`uname`).style.background = "#d9534f"
+        document.getElementsByName(`uname`)[0].placeholder = "username is too short!"
     }
 }
 
