@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<link rel="stylesheet" href="data/style.css" />
+		<link rel="stylesheet" href="data/style.css"/>
+		<link rel="icon" href="http://localhost:3000/favicon.ico"/>
 		<title>CCore entry</title>
 	</head>
 	<body>
-		
+
+		<div class="lds-ring" id="loader">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
 			<div class="userIn">
 				<div class="join-top">
 					<img src="https://i.ibb.co/0XnFLjW/ccore.png" alt="" height="64px" width="64px">
@@ -26,6 +33,9 @@
 						<input type="button" value="Reconnect" onmouseover="chbg('visible')" onmouseout="chbg('hidden')" id="reconnect" onclick="reConnect()">
 					</div>
 				</form>
+			</div>
+			<div class="toaster">
+				<div id="toasty"></div>
 			</div>
 				<script src="data/enter.js" onload="returning()"></script>
 	</body>

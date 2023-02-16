@@ -98,20 +98,10 @@ a {
 	border-radius: 0px 20px 20px 0px;
 }
 
-.chat-sidebar h2 {
-	font-size: 20px;
-	background: rgba(0, 0, 0, 0.1);
-	padding: 10px;
-	margin-bottom: 20px;
-}
-
 .chat-sidebar h3 {
 	margin-bottom: 15px;
 }
 
-.chat-sidebar ul li {
-	padding: 10px 0;
-}
 
 .chat-messages {
 	padding: 30px;
@@ -156,6 +146,24 @@ a {
 	border: none;
 	background: var(--silico);
 	border-radius: 10px 0px 0px 10px;
+}
+
+.chat-form-container button {
+	border-radius: 0px 10px 10px 0px;
+}
+
+.usr-list {
+	display: flex;
+	flex-direction: row;
+	background-color: #1A1A1A;
+	margin: 10px;
+	font-size: 1.2em;
+	padding: 20px;
+	border-radius: 0px 10px 10px 10px;
+}
+
+.usr-list span {
+	margin-right: 20px;
 }
 
 /* Join Page */
@@ -306,3 +314,106 @@ a {
 		display: none;
 	}
 }
+
+.toaster {
+	width: 100%;
+	position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	display: grid;
+	place-items: center;
+}
+
+
+
+#toasty {
+	visibility: hidden; /* Hidden by default. Visible on click */
+	min-width: 250px; /* Set a default minimum width */
+	background-color: #333; /* Black background color */
+	color: #fff; /* White text color */
+	text-align: center; /* Centered text */
+	border-radius: 2px; /* Rounded borders */
+	padding: 16px; /* Padding */
+	position: fixed; /* Sit on top of the screen */
+	z-index: 1; /* Add a z-index if needed */ /* Center the snackbar */
+	bottom: 30px; /* 30px from the bottom */
+  }
+  
+  /* Show the snackbar when clicking on a button (class added with JavaScript) */
+  #toasty.show {
+	visibility: visible; /* Show the snackbar */
+	/* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+	However, delay the fade out process for 2.5 seconds */
+	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadein {
+	from {bottom: 0; opacity: 0;}
+	to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+	from {bottom: 0; opacity: 0;}
+	to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+	from {bottom: 30px; opacity: 1;}
+	to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+	from {bottom: 30px; opacity: 1;}
+	to {bottom: 0; opacity: 0;}
+  }
+
+  .lds-ring {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	display: none;
+	top: 0;
+	left: 0;
+	text-align: center;
+	opacity: 0.8;
+	background-color: #111; 
+	z-index: 99;
+  
+  }
+  .lds-ring div {
+	display: block;
+	position: absolute;
+	top: 45%;
+	left: 47%;
+	transform: translate(-50%, -50%);
+	z-index: 100;
+	box-sizing: border-box;
+	
+	position: absolute;
+	width: 64px;
+	height: 64px;
+	border: 8px solid #fff;
+	border-radius: 50%;
+	animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+	border-color: #fff transparent transparent transparent;
+  }
+  .lds-ring div:nth-child(1) {
+	animation-delay: -0.45s;
+  }
+  .lds-ring div:nth-child(2) {
+	animation-delay: -0.3s;
+  }
+  .lds-ring div:nth-child(3) {
+	animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+	0% {
+	  transform: rotate(0deg);
+	}
+	100% {
+	  transform: rotate(360deg);
+	}
+  }

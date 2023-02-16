@@ -14,6 +14,26 @@ socket.on(`msg`, msg => {
     chatWindow.scrollTop = chatWindow.scrollHeight;
 });
 
+socket.on(`getName`, () => {
+    const uID = socket.id;
+    socket.emit(`sendName`, {Username, uID} );
+});
+
+socket.on(`setupUser`, obj => {
+    for(const property in obj) {
+        const div = document.createElement(`div`);
+        div.id = property;
+        div.classList.add(`usr-list`);
+        div.innerHTML = `<span class="material-symbols-outlined">
+        person
+        </span><p class="meta">${obj[property]}</p>`;
+        document.getElementById(`users`).appendChild(div);
+    }
+});
+
+socket.on(`userDc`, toRemove => {
+    document.getElementById(toRemove).remove();
+});
 
 chatForm.addEventListener(`submit`, (e) => {
     
@@ -28,6 +48,9 @@ chatForm.addEventListener(`submit`, (e) => {
 });
 
 function outputMsg(msg) {
+    if (msg.usrname == ``){
+        msg.usrname = `AnonymUser`
+    }
     const div = document.createElement(`div`);
     div.classList.add(`message`);
     div.innerHTML = `
@@ -36,3 +59,12 @@ function outputMsg(msg) {
     `;
     document.querySelector(`.chat-messages`).appendChild(div);
 }
+
+function kickUser() {
+    socket.emit(`kick`);
+    console.log(socket.id);
+    
+}
+
+
+

@@ -4,7 +4,8 @@ const http = require(`http`)
 const express = require(`express`);
 const socketio = require(`socket.io`);
 const { Socket } = require("dgram");
-const formatMsg = require(`./utils/messages`)
+const formatMsg = require(`./utils/messages`);
+const { send } = require("process");
 
 
 const app = express();
@@ -18,17 +19,38 @@ const botName = `CCore`;
 
 // Run on connect
 
-io.on(`connection`, socket => {
+const userList = {};
+const uList = [];
+
+io.sockets.on(`connection`, socket => {
+    const tempID = socket.id;
     //welcome
     socket.emit(`msg`, formatMsg(botName, `Welcome`))
 
 
     // on connect
     socket.broadcast.emit(`msg`, formatMsg(botName, `user joined`));
+    socket.emit(`getName`);
+
+    socket.on(`sendName`, uInfo => {
+        userList[uInfo.uID] = uInfo.Username;
+        console.log(`"` + uInfo.Username + `" connected (` + uInfo.uID+ `)` );
+        if(!uList.includes(uInfo.uID)) {
+            uList.push(uInfo.Username);
+        }
+        socket.emit(`setupUser`, userList);
+    });
+
+    socket.on(`kick`, () => {
+        console.log(userList);
+    });
 
     // on disconnect 
     socket.on(`disconnect`, () => {
+        socket.emit(`userDc`, socket.id);
         io.emit(`msg`, formatMsg(botName, `user left`));
+        console.log("disconnected: "+socket.id);
+        delete userList[socket.id];
     });
 
     //

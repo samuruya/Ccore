@@ -2,38 +2,51 @@ const lastuData = window.localStorage.getItem('userData');
 var lastUserData = "none";
 var lastRoomID = "none";
 
-function login() {
+async function login() {
     const validEntry = false
     const userData = {        
        usrname: document.getElementById(`uname`).value,
         roomID: document.getElementById(`room`).value
     }
 
-    if (userData.usrname.length >= 4 && userData.roomID.length >= 5) {
-
+    if (userData.usrname.length >= 4 && userData.roomID.length <= 6 && userData.roomID.length >= 5) {
+        // entry try
             localStorage.setItem('userData', JSON.stringify(userData));
             console.log('login');
             let baseUrl = "http://localhost:3000/chat.html?";
             let queryString = "room=" + userData.roomID;
             let fullUrl = baseUrl + queryString;
-            window.location.href = fullUrl;             
+            load();
+            await sleep(3000);
+            window.location.href = fullUrl;
+
+
     }
-    if(userData.roomID.length < 5) {
-        console.log('roomID is invalid!');
-        document.getElementById(`room`).style.background = "#d9534f"
-        document.getElementsByName(`room`)[0].placeholder = "invalid room id"
+    if(userData.roomID.length < 5 || userData.roomID.length > 6) {
+        // roomID err
+            console.log('roomID is invalid!');
+            document.getElementById(`room`).style.background = "#d9534f"
+            toasty(`invalid roomID please check if your roomID is 5 or 6 chars long`);
     }
-    if(userData.usrname.length < 4) {
-        console.log('Username to Short!');
+    if(userData.usrname.length < 4 || userData.usrname.length > 10) {
+        // name err
+        console.log('Username too Short!');
         document.getElementById(`uname`).style.background = "#d9534f"
-        document.getElementsByName(`uname`)[0].placeholder = "username is too short!"
+        toasty(`invalid Username, make sure the username is longer than 4 and shorter than 10 chars`)
     }
 }
 
-function reConnect() {
+async function reConnect() {
     if(lastRoomID != null) {
-        window.location.href = "chat.html";
-        //add code to reconnect
+        lastUserData = JSON.parse(lastuData);
+        lastRoomID = lastUserData["roomID"];
+        console.log('reconnet');
+        let baseUrl = "http://localhost:3000/chat.html?";
+        let queryString = "room=" + lastRoomID;
+        let fullUrl = baseUrl + queryString;
+        load();
+        await sleep(2000)
+        window.location.href = fullUrl;
     }
 }
 
@@ -56,4 +69,19 @@ function chbg(color) {
     }
 }   
 
+function toasty(alertMsg) {
+    var x = document.getElementById("toasty");
+    x.innerHTML = alertMsg
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
+//loader
+
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+function load() {
+    document.getElementById("loader").style.display = "flex";
+}
 
