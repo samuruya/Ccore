@@ -7,8 +7,6 @@ const userData = JSON.parse(uData);
 const Username = userData["usrname"];
 
 
-
-
 socket.on(`msg`, msg => {    
     outputMsg(msg);
     chatWindow.scrollTop = chatWindow.scrollHeight;
@@ -19,17 +17,11 @@ socket.on(`getName`, () => {
     socket.emit(`sendName`, {Username, uID} );
 });
 
-socket.on(`setupUser`, obj => {
-    for(const property in obj) {
-        const div = document.createElement(`div`);
-        div.id = property;
-        div.classList.add(`usr-list`);
-        div.innerHTML = `<span class="material-symbols-outlined">
-        person
-        </span><p class="meta">${obj[property]}</p>`;
-        document.getElementById(`users`).appendChild(div);
-    }
+socket.on(`refreshUL`, obj => {
+    usrRender(obj);
 });
+
+//remove all and add all users on disconnect and join to avoid the need to reaload to see new users
 
 socket.on(`userDc`, toRemove => {
     document.getElementById(toRemove).remove();
@@ -63,7 +55,19 @@ function outputMsg(msg) {
 function kickUser() {
     socket.emit(`kick`);
     console.log(socket.id);
-    
+}
+
+function usrRender(obj) {
+    document.getElementById(`users`).innerHTML = ``
+    for(const property in obj) {
+        const div = document.createElement(`div`);
+        div.id = property;
+        div.classList.add(`usr-list`);
+        div.innerHTML = `<span class="material-symbols-outlined">
+        person
+        </span><p class="meta">${obj[property]}</p>`;
+        document.getElementById(`users`).appendChild(div);
+    }
 }
 
 

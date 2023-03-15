@@ -38,7 +38,7 @@ io.sockets.on(`connection`, socket => {
         if(!uList.includes(uInfo.uID)) {
             uList.push(uInfo.Username);
         }
-        socket.emit(`setupUser`, userList);
+        io.emit(`refreshUL`, userList);
     });
 
     socket.on(`kick`, () => {
@@ -48,9 +48,10 @@ io.sockets.on(`connection`, socket => {
     // on disconnect 
     socket.on(`disconnect`, () => {
         socket.emit(`userDc`, socket.id);
-        io.emit(`msg`, formatMsg(botName, `user left`));
+        io.emit(`msg`, formatMsg(botName, `${userList[socket.id ]} left`));
         console.log("disconnected: "+socket.id);
         delete userList[socket.id];
+        io.emit(`refreshUL`, userList);
     });
 
     //
